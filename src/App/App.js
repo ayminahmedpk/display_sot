@@ -2,12 +2,15 @@
 // React
 import React from 'react';
 // Router
-// Router
 import {
     BrowserRouter as Router ,
     Routes                  ,
     Route                   ,
 } from 'react-router-dom';
+
+// Redux
+import { Provider } from 'react-redux';
+import store from '../Redux/store.js';
 
 
 // Pages
@@ -21,17 +24,20 @@ import './App.scss';
 
 const App = () => (
     <>
-    <Router>
+    <Provider store={store}>
+        
+        <Router>
 
-        <Routes>
+            <Routes>
 
-            <Route path={'/'} element={<SearchPage/>}> </Route>
+                <Route element={<SearchPage/>} path={'/'        } > </Route>
+                <Route element={<StampPage/> } path={'/:videoID'} > </Route>
 
-            <Route path={'/:videoID'} element={<StampPage/>}> </Route>
+            </Routes>
 
-        </Routes>
+        </Router>
 
-    </Router>
+    </Provider>
     </>
 );
 

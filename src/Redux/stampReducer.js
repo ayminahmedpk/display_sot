@@ -1,34 +1,36 @@
 // Dependencies
 // React
-import { createStore } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 
 
 
 // Action creators
-export const updatePlayerRef = (ref) => {
+export const addStamp = (stampText) => {
     return {
-        type    : 'UPDATE_PLAYER_REF' ,
-        payload : ref                 ,
+        type    : 'ADD_STAMP' ,
+        payload : stampText   ,
     }
 }
 
 
 // Initial state object
 export const initialState = {
-    playerRef: null
+    stampsCreated : 0  ,
+    stampList     : [] ,
 };
 
 
 // Reducer function
-const playerReducer = (state = initialState, action) => {
+export const stampReducer = (state = initialState, action) => {
     switch(action.type) {
         
-        case 'UPDATE_PLAYER_REF' :
+        case 'ADD_STAMP' :
             return {
-                ...state                   ,
-                playerRef : action.payload ,
+                ...state ,
+                stampsCreated : state.stampsCreated + 1,
+                stampList     : [
+                                    ...state.stampList ,
+                                    action.payload     ,
+                                ],
             }
         
         default  :
@@ -36,13 +38,3 @@ const playerReducer = (state = initialState, action) => {
 
     }
 }
-
-
-// Store
-const store = createStore(playerReducer, composeWithDevTools());
-//const store = createStore(playerReducer);
-//store.subscribe( () => console.log(store.getState()) );
-
-
-
-export default store;

@@ -5,11 +5,12 @@ import React from 'react';
 import { useParams } from 'react-router';
 // Redux
 import {Provider} from 'react-redux'                  ;
-import store      from '../../Redux/playerReducer.js' ;
+import store      from '../../Redux/store.js' ;
 
 // Components
 import YouTubeVideo from '../../Components/YouTubeVideo/YouTubeVideo.js'  ;
 import Controls     from '../../Components/Controls/ControlsContainer.js' ;
+import App from '../../App/App.js';
 
 // Helper Functions
 

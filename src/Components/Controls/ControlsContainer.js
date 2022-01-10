@@ -13,8 +13,11 @@ import './Controls.scss' ;
 
 
 const ControlsContainer = (props) => {
+    
+    console.log('whole state => ', useSelector(state => state));
 
-    const playerRef = useSelector(state => state.playerRef);
+    const playerRef = useSelector(state => state.player.playerRef);
+    
 
     // helper functions
     const getPlayer      = () => playerRef.current.player.player.player ;

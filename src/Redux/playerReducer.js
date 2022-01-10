@@ -1,8 +1,5 @@
 // Dependencies
 // React
-import { createStore } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-
 
 
 
@@ -22,7 +19,7 @@ export const initialState = {
 
 
 // Reducer function
-const playerReducer = (state = initialState, action) => {
+export const playerReducer = (state = initialState, action) => {
     switch(action.type) {
         
         case 'UPDATE_PLAYER_REF' :
@@ -38,11 +35,15 @@ const playerReducer = (state = initialState, action) => {
 }
 
 
+/*
+
 // Store
-const store = createStore(playerReducer, composeWithDevTools());
+const store = createStore(playerReducer);
 //const store = createStore(playerReducer);
 //store.subscribe( () => console.log(store.getState()) );
 
 
 
 export default store;
+
+*/

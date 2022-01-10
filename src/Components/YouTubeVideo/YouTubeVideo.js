@@ -2,6 +2,7 @@
 // React
 import {useRef, useEffect, React} from 'react'                     ;
 import {updatePlayerRef}          from '../../Redux/playerReducer' ;
+import { addStamp }               from '../../Redux/stampReducer'  ;
 // Redux
 import {useDispatch}              from 'react-redux'               ;
 // Other
@@ -17,7 +18,7 @@ const YouTubeVideo = (props) => {
     const ourRef = useRef(null)
     const dispatch = useDispatch();
     useEffect(
-        () => { dispatch(updatePlayerRef(ourRef)) } ,
+        () => { dispatch(updatePlayerRef(ourRef)); dispatch(addStamp('some stamp')); } ,
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [ourRef]
     );
