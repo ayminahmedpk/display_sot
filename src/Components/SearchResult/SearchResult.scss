@@ -1,0 +1,9 @@
+
+
+.search-result {
+    & + & { margin-top: 1rem; }
+}
+
+.search-result__title {
+    color   : white ;
+}
