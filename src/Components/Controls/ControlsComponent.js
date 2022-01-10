@@ -15,6 +15,9 @@ const ControlsComponent = ({containerProps}) => {
         repeat1Sec ,
         play1Sec   ,
         test       ,
+        stampText        ,
+        setStampText     ,
+        addStampListener ,
     } = containerProps;
 
     return (        
@@ -32,6 +35,16 @@ const ControlsComponent = ({containerProps}) => {
                 <button onClick = { repeat1Sec }> { `< 1 >` } </button>
                 <button onClick = { play1Sec   }> { `| 1 >` } </button>
                 <button onClick = { skip1Sec   }> { `1 >> ` } </button>
+            </div>
+            <div>
+                <input
+                    type     = "text"
+                    value    = {stampText}
+                    onChange = {
+                        event => {setStampText(event.target.value);}
+                    }
+                />
+                <button onClick = {addStampListener}> Add Stamp </button>
             </div>
         </div>
     );
