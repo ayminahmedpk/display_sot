@@ -11,6 +11,21 @@ export const addStamp = ({stampTime, stampText}) => {
     }
 }
 
+export const editStampTime = ({id, stampTime}) => {
+    return {
+        type    : 'EDIT_STAMP_TIME' ,
+        payload : {id, stampTime}   ,
+    }
+}
+
+
+export const editStampText = ({id, stampText}) => {
+    return {
+        type    : 'EDIT_STAMP_TEXT' ,
+        payload : {id, stampText} ,
+    }
+}
+
 
 // Initial state object
 export const initialState = {
@@ -23,20 +38,46 @@ export const initialState = {
 export const stampReducer = (state = initialState, action) => {
     switch(action.type) {
         
-        case 'ADD_STAMP' :
+        case 'ADD_STAMP' : {
             const newStampList = JSON.parse(JSON.stringify(state.stampList));
             newStampList.push({
-                stampID : state.stampsCreated,
-                ...action.payload}
-            );
+                stampID : state.stampsCreated ,
+                ...action.payload             ,
+            });
             return {
                 stampList     : newStampList            ,
                 stampsCreated : state.stampsCreated + 1 ,
             }
-        break;
+            break;
+        }
+
+        case 'EDIT_STAMP_TIME' : {
+            const newStampList  = JSON.parse(JSON.stringify(state.stampList));
+            const targetElement = newStampList.find(
+                element =>  (element.stampID == action.payload.id)
+            );
+            targetElement.stampTime = action.payload.stampTime;
+            return {
+                stampList     : newStampList        ,
+                stampsCreated : state.stampsCreated ,
+            }
+            break;
+        }
+
+        case 'EDIT_STAMP_TEXT' : {
+            const newStampList  = JSON.parse(JSON.stringify(state.stampList));
+            const targetElement = newStampList.find(
+                element =>  (element.stampID == action.payload.id)
+            );
+            targetElement.stampText = action.payload.stampText;
+            return {
+                stampList     : newStampList        ,
+                stampsCreated : state.stampsCreated ,
+            }
+            break;
+        }
         
-        default  :
-                return state;
+        default : { return state; }
 
     }
 }

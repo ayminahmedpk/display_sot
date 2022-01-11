@@ -11,6 +11,7 @@ import store      from '../../Redux/store.js' ;
 import YouTubeVideo from '../../Components/YouTubeVideo/YouTubeVideo.js'  ;
 import Controls     from '../../Components/Controls/ControlsContainer.js' ;
 import App from '../../App/App.js';
+import StampListComponent from '../../Components/StampList/StampListComponent.js';
 
 // Helper Functions
 
@@ -26,6 +27,7 @@ const StampPage = (props) => {
         <Provider store={store}>
             < YouTubeVideo videoID={videoID}/>
             < Controls     />
+            <StampListComponent />
         </Provider>
         </>
     );

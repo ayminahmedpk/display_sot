@@ -57,6 +57,7 @@ const ControlsContainer = (props) => {
         dispatch(addStamp({stampTime: getRoundedTime(), stampText: stampText}));
         setStampText('');
     }
+    
 
     const containerProps = {
         pause      ,
