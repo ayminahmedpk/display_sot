@@ -1,4 +1,7 @@
-import React from "react";
+import {
+    React,
+    useState
+} from "react";
 
 import { useSelector } from "react-redux";
 
@@ -7,13 +10,31 @@ const Comment = () => {
 
     const stampList = useSelector(state => state.stamps.stampList);
 
-    const generateComment = () => {
-        let comment = '';
-        stampList.forEach(stampItem => {
-            comment += `${stampItem.stampTime} ${stampItem.stampText}\n`;
-        })
-        console.log(comment);
+    const [comment       , setComment     ] = useState('') ;
+    const [textboxStatus , setTextboxStatus] = useState(0) ;
+
+    const handleCommentChange = (event) => {
+        setComment(event.target.value)
     }
+
+    const textbox = (
+        <textarea
+            type="textarea"
+            value={comment}
+            onChange={handleCommentChange}
+        />
+    )
+
+    const generateComment = () => {
+        let generatedComment = '';
+        stampList.forEach(stampItem => {
+            generatedComment += `${stampItem.stampTime} ${stampItem.stampText}\n`;
+        })
+        setTextboxStatus(1);
+        setComment(generatedComment);
+    }
+
+    // const comment = generateComment();
 
     const generateStampsButton = (
         <button onClick={generateComment}> Generate Comment </button>
@@ -25,7 +46,8 @@ const Comment = () => {
 
     return (
         <>
-            {stampList.length > 0 ? generateStampsButton : <></>  }
+            {stampList.length > 0 ? <div>{generateStampsButton}</div> : <></>}
+            {textboxStatus ? <div>{textbox}</div> : <></>}
         </>
     )
 }
