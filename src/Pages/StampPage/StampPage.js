@@ -10,8 +10,8 @@ import store      from '../../Redux/store.js' ;
 // Components
 import YouTubeVideo from '../../Components/YouTubeVideo/YouTubeVideo.js'  ;
 import Controls     from '../../Components/Controls/ControlsContainer.js' ;
-import App from '../../App/App.js';
 import StampListComponent from '../../Components/StampList/StampListComponent.js';
+import Comment from '../../Components/Comment/Comment.js'
 
 // Helper Functions
 
@@ -28,6 +28,7 @@ const StampPage = (props) => {
             < YouTubeVideo videoID={videoID}/>
             < Controls     />
             <StampListComponent />
+            <Comment/>
         </Provider>
         </>
     );
