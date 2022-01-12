@@ -18,11 +18,17 @@ export const editStampTime = ({id, stampTime}) => {
     }
 }
 
-
 export const editStampText = ({id, stampText}) => {
     return {
         type    : 'EDIT_STAMP_TEXT' ,
         payload : {id, stampText} ,
+    }
+}
+
+export const deleteStamp = (id) => {
+    return {
+        type    : 'DELETE_STAMP' ,
+        payload : id             ,
     }
 }
 
@@ -75,6 +81,16 @@ export const stampReducer = (state = initialState, action) => {
                 stampsCreated : state.stampsCreated ,
             }
             break;
+        }
+
+        case 'DELETE_STAMP' : {
+            const newStampList = state.stampList.filter(element => (
+                element.stampID!=action.payload
+            ))
+            return {
+                stampList     : newStampList        ,
+                stampsCreated : state.stampsCreated ,
+            }
         }
         
         default : { return state; }

@@ -3,7 +3,11 @@
 import {React, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { editStampTime, editStampText } from '../../Redux/stampReducer';
+import {
+    editStampTime ,
+    editStampText ,
+    deleteStamp   ,
+} from '../../Redux/stampReducer';
 
 import StampListItem from './StampListItem';
 
@@ -23,15 +27,21 @@ const StampListComponent = () => {
         const value = event.target.value;
         dispatch(editStampText({id: id, stampText : value}))
     }
+
+    const handleDeleteStamp = (event) => {
+        const id = event.target.parentElement.querySelector('.id').value;
+        dispatch(deleteStamp(id));
+    }
     
     const stampElements = stampList.map(stampItem =>
         <div key={stampItem.stampID}>
             <StampListItem
-                stampID          = {stampItem.stampID}
-                stampTime        = {stampItem.stampTime}
-                stampText        = {stampItem.stampText}
-                handleChangeTime = {handleChangeTime}
-                handleChangeText = {handleChangeText}
+                stampID           = {stampItem.stampID}
+                stampTime         = {stampItem.stampTime}
+                stampText         = {stampItem.stampText}
+                handleChangeTime  = {handleChangeTime}
+                handleChangeText  = {handleChangeText}
+                handleDeleteStamp = {handleDeleteStamp}
             />
         </div>
     );
