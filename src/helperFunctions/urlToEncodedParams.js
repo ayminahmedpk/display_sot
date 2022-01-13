@@ -3,7 +3,7 @@
 // parameters as key-value pairs.
 
 const urlToEncodedParams = (url) => {
-    const queryString = url.split('?')[1];
+    const queryString = url.split('#')[1];
     const queryPairs  = queryString.split('&').map(
         query => query.split('=')
     );

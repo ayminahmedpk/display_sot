@@ -14,8 +14,9 @@ import store from '../Redux/store.js';
 
 
 // Pages
-import SearchPage from '../Pages/SearchPage/SearchPage.js';
-import StampPage  from '../Pages/StampPage/StampPage.js'  ;
+import SearchPage        from '../Pages/SearchPage/SearchPage.js';
+import StampPage         from '../Pages/StampPage/StampPage.js'  ;
+import OAuthRedirectPage from '../Pages/OAuthRedirectPage/OAuthRedirectPage.js';
 
 
 // Style
@@ -30,8 +31,9 @@ const App = () => (
 
             <Routes>
 
-                <Route element={<SearchPage/>} path={'/'        } > </Route>
-                <Route element={<StampPage/> } path={'/:videoID'} > </Route>
+                <Route element={<SearchPage/>}         path={'/'        }       > </Route>
+                <Route element={<StampPage/> }         path={'/:videoID'}       > </Route>
+                <Route element={<OAuthRedirectPage/> } path={'/redirect.html'} > </Route>
 
             </Routes>
 
