@@ -17,18 +17,29 @@ const Comment = () => {
         setComment(event.target.value)
     }
 
+    const secondsToTimeString = (totalSeconds) => {
+        const seconds = totalSeconds % 60;
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const hours   = Math.floor(totalSeconds / 3600);
+        console.log(`${hours}:${minutes}:${seconds}`);
+        return (`${hours}:${minutes}:${seconds}`)
+    }
+
     const textbox = (
-        <textarea
-            type="textarea"
-            value={comment}
-            onChange={handleCommentChange}
-        />
+        <div>
+            <textarea
+                type="textarea"
+                value={comment}
+                onChange={handleCommentChange}
+            />
+        </div>
     )
 
     const generateComment = () => {
         let generatedComment = '';
         stampList.forEach(stampItem => {
-            generatedComment += `${stampItem.stampTime} ${stampItem.stampText}\n`;
+            generatedComment += secondsToTimeString(stampItem.stampTime);
+            generatedComment += ` ${stampItem.stampText}\n`;
         })
         setTextboxStatus(1);
         setComment(generatedComment);
@@ -37,17 +48,36 @@ const Comment = () => {
     // const comment = generateComment();
 
     const generateStampsButton = (
-        <button onClick={generateComment}> Generate Comment </button>
+        <div>
+            <button onClick={generateComment}> Generate Comment </button>
+        </div>
     );
 
     const addStampsPrompt = (
         <div>Add stamps to get started...</div>
     );
 
+    const hideTextbox = () => { setTextboxStatus(0); }
+    const hideTextboxButton = (
+        <div>
+            <button onClick={hideTextbox}>
+                Hide Textbox
+            </button>
+        </div>
+    )
+
     return (
         <>
-            {stampList.length > 0 ? <div>{generateStampsButton}</div> : <></>}
-            {textboxStatus ? <div>{textbox}</div> : <></>}
+            {(
+                stampList.length > 0 ?
+                <div>{generateStampsButton}</div> :
+                <div>{addStampsPrompt}</div>
+            )}
+            {(
+                (stampList.length > 0 & textboxStatus) ?
+                <>{textbox}{hideTextboxButton}</> :
+                <></>
+            )}
         </>
     )
 }
