@@ -3,8 +3,8 @@
 import React from 'react';
 // Router
 import {
- // BrowserRouter as Router ,
-    HashRouter as Router    ,
+    BrowserRouter as Router ,
+ // HashRouter as Router    ,
     Routes                  ,
     Route                   ,
 } from 'react-router-dom';
@@ -34,7 +34,7 @@ const App = () => (
 
                 <Route element={<SearchPage/>}         path={'/'        }       > </Route>
                 <Route element={<StampPage/> }         path={'/:videoID'}       > </Route>
-                <Route element={<OAuthRedirectPage/> } path={'/redirect.html'} > </Route>
+                <Route element={<OAuthRedirectPage/> } path={'/redirect'} > </Route>
 
             </Routes>
 

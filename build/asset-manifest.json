@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sot3/build/static/css/main.a4a1d281.css",
-    "main.js": "/sot3/build/static/js/main.f537ffd8.js",
+    "main.js": "/sot3/build/static/js/main.073733db.js",
     "index.html": "/sot3/build/index.html",
     "main.a4a1d281.css.map": "/sot3/build/static/css/main.a4a1d281.css.map",
-    "main.f537ffd8.js.map": "/sot3/build/static/js/main.f537ffd8.js.map"
+    "main.073733db.js.map": "/sot3/build/static/js/main.073733db.js.map"
   },
   "entrypoints": [
     "static/css/main.a4a1d281.css",
-    "static/js/main.f537ffd8.js"
+    "static/js/main.073733db.js"
   ]
 }
