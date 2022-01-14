@@ -75,7 +75,7 @@ const Comment = () => {
         const endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
         var params = {
             client_id: '898576508322-96ntea1j9v37bnq24gg2e787cfs4to6i.apps.googleusercontent.com',
-            redirect_uri: 'https://ayminpk.github.io/sot3/build/redirect',
+            redirect_uri: 'https://sot4.netlify.app/',
             scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
             state: 'fetchAuthorizationToken',
             include_granted_scopes: 'true',
@@ -113,7 +113,7 @@ const Comment = () => {
                                 'textOriginal': comment,
                             }
                         },
-                        videoId : window.location.pathname.substring(1),
+                        videoId : window.location.toString().split('/').slice(-1)[0]
                     }
                 })
             }

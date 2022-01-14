@@ -7,9 +7,11 @@ import readAccessTokenFromStorage from '../../helperFunctions/readAccessTokenFro
 
 const OAuthRedirect = () => {
     
+    /*
     console.log(window.location.hash);
     const params = decodeParams(urlToEncodedParams(window.location.hash, 'hash'));
     console.log(params);
+    */
 
     if (window.location.hash !== '') {
     const params = decodeParams(urlToEncodedParams(window.location.hash, 'hash'));
