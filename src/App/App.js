@@ -31,9 +31,9 @@ const App = () => (
 
             <Routes>
 
-                <Route element={<SearchPage/>}         path={'/'        }       > </Route>
-                <Route element={<StampPage/> }         path={'/:videoID'}       > </Route>
-                <Route element={<OAuthRedirectPage/> } path={'/redirect.html'} > </Route>
+                <Route element={<SearchPage/>}         path={'https://ayminpk.github.io/sot3/build/'        }       > </Route>
+                <Route element={<StampPage/> }         path={'https://ayminpk.github.io/sot3/build/:videoID'}       > </Route>
+                <Route element={<OAuthRedirectPage/> } path={'https://ayminpk.github.io/sot3/build/redirect.html'} > </Route>
 
             </Routes>
 
