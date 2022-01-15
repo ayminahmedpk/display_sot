@@ -23,11 +23,19 @@
         Components/
             Component1/
             Component2/
-                Sub-component/
-            Component 3
+            Component3/
+            Component2-Subcomponent1/
         Pages/
             Page1/
             Page2/
         Redux/
         HelperFunctions/
         index.js
+
+  * It is better to have all the components and subcomponents at the same level
+    of depth in terms of directories. This makes it easier to reuse components
+    within the program and transferring them externally.
+    
+    Also makes it easier and more uniform to manage code in the long run, as you
+    don't have to search for a specific component in a specific directory. You
+    know they are all in one place.
