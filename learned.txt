@@ -39,3 +39,7 @@
     Also makes it easier and more uniform to manage code in the long run, as you
     don't have to search for a specific component in a specific directory. You
     know they are all in one place.
+
+    Remember, the "what's going on here" file will show the logical structure
+    of components (or you can have it elsewhere too) to make it easier to
+    understand the program immediately.
