@@ -1,7 +1,0 @@
-
-
-It seems, when you use useSelector and seek for a particular value, the React
-Redux AI looks for the most reasonable match for that query. It's like a mini
-search function. So make sure your namings are clear and separate, or to use
-the full path like
-    const target = useSelector( state => state.ambiguous.specific.target ) ;

@@ -1,0 +1,33 @@
+
+
+- It seems, when you use useSelector and seek for a particular value, the React
+  Redux AI looks for the most reasonable match for that query. It's like a mini
+  search function. So make sure your namings are clear and separate, or to use
+  the full path like
+    const target = useSelector( state => state.ambiguous.specific.target ) ;
+
+
+- Redux and useState ARE supposed to be used together. Redux is only used for
+  sharing state that absolutely MUST be shared across components. useState is
+  for sharing for all other state; state that is local to the component.
+
+
+- The "homepage" attribute in package.json was edited. "." for testing in a
+  local developmental enviroment, and the actual web address for deployment
+  purposes.
+
+- A nice directory structure is:
+
+    src/
+        App/
+        Components/
+            Component1/
+            Component2/
+                Sub-component/
+            Component 3
+        Pages/
+            Page1/
+            Page2/
+        Redux/
+        HelperFunctions/
+        index.js

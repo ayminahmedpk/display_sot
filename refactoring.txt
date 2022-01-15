@@ -1,0 +1,10 @@
+
+* StampListContainer removal
+
+* StampListItem to be moved into separate folder?
+
+* Container / Component naming consistency (controls)
+
+* Edit stamp methods in Redux
+
+* OAuth
