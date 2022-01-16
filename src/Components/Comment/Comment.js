@@ -73,7 +73,6 @@ const Comment = () => {
 
     const postCommentHandler = async () => {
         const result = await tryPostingComment(comment);
-        console.log(result);
         switch (result[0]) {
 
             case 'no token' :
