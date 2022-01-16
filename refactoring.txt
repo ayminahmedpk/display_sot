@@ -4,7 +4,7 @@
 -> Comment (failed to set OAuth functions in helpers - promises create issues
    when passing awaited results as react components)
 
-x Change domain name
+-> Change domain name
 
 x Confirmation of posted comment / link of it
 

@@ -5,7 +5,10 @@ import {
 
 import { useSelector } from "react-redux";
 
-import readAccessTokenFromStorage from "../../helperFunctions/readAccessTokenFromStorage";
+import {
+    tryPostingComment ,
+    revokeAccess      ,
+} from "./CommentOAuthHelper";
 
 
 const Comment = () => {
@@ -24,7 +27,6 @@ const Comment = () => {
         const seconds = totalSeconds % 60;
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const hours   = Math.floor(totalSeconds / 3600);
-        console.log(`${hours}:${minutes}:${seconds}`);
         return (`${hours}:${minutes}:${seconds}`)
     }
 
@@ -69,141 +71,51 @@ const Comment = () => {
         </div>
     )
 
-    
-    
-    // OAuth functions
+    const postCommentHandler = async () => {
+        const result = await tryPostingComment(comment);
+        console.log(result);
+        switch (result[0]) {
 
-    // To obtain new token
-    const fetchAuthorizationToken = () => {
+            case 'no token' :
+                setFeedback(
+                    <div>
+                        <p>
+                            No access token found. Please allow access in the
+                            new tab and retry posting the comment in this tab.
+                        </p>
+                    </div>
+                );
+            break;
 
-        const endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-        var params = {
-            client_id: '898576508322-96ntea1j9v37bnq24gg2e787cfs4to6i.apps.googleusercontent.com',
-            redirect_uri: 'http://localhost:3000',
-            scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
-            state: 'fetchAuthorizationToken',
-            include_granted_scopes: 'true',
-            response_type: 'token',
-        };
-    
-        const form = document.createElement('form');
-        form.setAttribute('method', 'GET');
-        form.setAttribute('action', endpoint);
-        form.setAttribute('target', '_blank'); // new tab hopefully
-        for (const param in params) {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'hidden');
-            input.setAttribute('name', param);
-            input.setAttribute('value', params[param]);
-            form.appendChild(input);
-        }
-        document.body.appendChild(form);
-        form.submit();
-    }
+            case 'success' :
+                setFeedback(
+                    <div>
+                        <p>
+                            Comment posted successfully.
+                            Link : <a href={result[1]}>{result[1]}</a>
+                        </p>
+                    </div>
+                );
+            break;
 
+            case 'error' :
+                setFeedback(
+                    <div>
+                        <p>
+                            Unable to post comment directly.
+                            Clearing cache may help.
+                        </p>
+                        <p>
+                            Error message: {result[1]}
+                        </p>
+                    </div>
+                );
 
-    // Post a comment and set feedback accordingly
-    const postComment = async () => {
-        const access_token = readAccessTokenFromStorage();
-        const response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/commentThreads?`
-            + `part=snippet`
-            + `&` + `access_token=${access_token}`,
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    snippet: {
-                        topLevelComment : {
-                            snippet: {
-                                'textOriginal': comment,
-                            }
-                        },
-                        videoId : window.location.toString().split('/').slice(-1)[0]
-                    }
-                })
-            }
-        );
-        const jsonResponse = await response.json();
-        if (jsonResponse.id) {
-            const commentLink = "https://www.youtube.com/watch?v=" +
-                                jsonResponse.snippet.videoId       +
-                                "&lc="                             +
-                                jsonResponse.id                    ;
-            setFeedback(
-                <div>
-                    <p>
-                        Comment posted successfully.
-                        Link : <a href={commentLink}>{commentLink}</a>
-                    </p>
-                </div>
-            )
-        }
-        else {
-            setFeedback(
-                <div>
-                    <p>
-                        Unable to post comment directly.
-                        Clearing cache may help.
-                    </p>
-                    <p>
-                        Error message: {jsonResponse.error.message}
-                    </p>
-                </div>
-            );
-        }
-        console.log(jsonResponse);
-    }
-
-    
-    // Check if token exists before posting, and set feedback accordingly.
-    const tryPostingComment = () => {
-        if(readAccessTokenFromStorage()) {
-            postComment()
-        }
-        else {
-            setFeedback(
-                <div>
-                    <p>
-                        No access token found. Please allow access in the new
-                        tab and retry posting the comment in this tab.
-                    </p>
-                </div>
-            )
-            fetchAuthorizationToken()
         }
     }
-
-
-    // Revoke access token
-    const revokeAccess = async () => {
-
-        const access_token = readAccessTokenFromStorage();
-
-        if(access_token) {
-            const endpoint     = 'https://oauth2.googleapis.com/revoke';
-        
-            const form = document.createElement('form');
-            form.setAttribute('method', 'POST');
-            form.setAttribute('action', endpoint);
-            form.setAttribute('target', '_blank'); // new tab hopefully
-            
-            const input = document.createElement('input');
-            input.setAttribute('type', 'hidden');
-            input.setAttribute('name', 'token');
-            input.setAttribute('value', access_token);
-            form.appendChild(input);
-    
-            document.body.appendChild(form);
-            form.submit();
-
-            localStorage.removeItem('oauth2-test-params');
-        }
-
-    }
-
 
     const postCommentButton = (
-        <button onClick={tryPostingComment}> Post Comment Directly </button>
+        <button onClick={postCommentHandler}> Post Comment Directly </button>
     )
 
     const revokeAccessButton = (
