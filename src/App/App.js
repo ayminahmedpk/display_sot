@@ -3,8 +3,8 @@
 import React from 'react';
 // Router
 import {
- // BrowserRouter as Router ,
-    HashRouter as Router    ,
+    BrowserRouter as Router ,
+ // HashRouter as Router    ,
     Routes                  ,
     Route                   ,
 } from 'react-router-dom';
@@ -23,12 +23,9 @@ import OAuthRedirectPage from '../Pages/OAuthRedirectPage/OAuthRedirectPage.js';
 // Style
 import './App.scss';
 
-
-const App = () => (
+const AppComponent = (
     <>
     <Provider store={store}>
-        
-        <OAuthRedirectPage />
 
         <Router>
 
@@ -43,6 +40,13 @@ const App = () => (
         </Router>
 
     </Provider>
+    </>
+)
+
+
+const App = () => (
+    <>
+        {window.location.hash=='' ? AppComponent : <OAuthRedirectPage/>}
     </>
 );
 

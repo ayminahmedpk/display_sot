@@ -15,9 +15,9 @@ const ControlsComponent = ({containerProps}) => {
         repeat1Sec ,
         play1Sec   ,
         test       ,
-        stampText        ,
-        setStampText     ,
-        addStampListener ,
+        stampText           ,
+        setStampText        ,
+        createStampListener ,
     } = containerProps;
 
     return (        
@@ -44,7 +44,7 @@ const ControlsComponent = ({containerProps}) => {
                         event => {setStampText(event.target.value);}
                     }
                 />
-                <button onClick = {addStampListener}> Add Stamp </button>
+                <button onClick = {createStampListener}> Add Stamp </button>
             </div>
         </div>
     );

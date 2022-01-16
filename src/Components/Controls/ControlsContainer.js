@@ -5,7 +5,7 @@ import {useState, React}       from "react"       ;
 // Redux
 import { useSelector,
          useDispatch } from "react-redux"               ;
-import { addStamp }    from '../../Redux/stampReducer'  ;
+import { createStamp } from '../../Redux/stampReducer'  ;
 
 // Component
 import ControlsComponent from "./ControlsComponent.js" ;
@@ -16,11 +16,15 @@ import './Controls.scss' ;
 
 
 const ControlsContainer = (props) => {
-    
-    // console.log('whole state => ', useSelector(state => state));
 
-    const dispatch = useDispatch();
+    
+    // redux
+    const dispatch  = useDispatch();
     const playerRef = useSelector(state => state.player.playerRef);
+
+    
+    // local state
+    const [stampText, setStampText] = useState('');
     
 
     // helper functions
@@ -42,7 +46,8 @@ const ControlsContainer = (props) => {
         setTimeout( () => { pause(); getPlayer().seekTo(endingTime); } , 999 );
     }
 
-    // high-level functions to pass to component
+    
+    // High-level functions to pass to component
     const pause      = () => { getPlayer().pauseVideo();      } ;
     const play       = () => { getPlayer().playVideo();       } ;
     const logTime    = () => { console.log(getRoundedTime())  } ;
@@ -52,14 +57,14 @@ const ControlsContainer = (props) => {
     const play1Sec   = () => { show1Sec('play')               } ;
     const test       = () => { console.log(getRoundedTime()); } ;
 
-    const [stampText, setStampText] = useState('');
-    const addStampListener = () => {
-        dispatch(addStamp({stampTime: getRoundedTime(), stampText: stampText}));
+    const createStampListener = () => {
+        dispatch(createStamp([getRoundedTime(), stampText]));
         setStampText('');
     }
-    
 
-    const containerProps = {
+
+    // Spawning the enhanced component and returning it
+    const componentProps = {
         pause      ,
         play       ,
         logTime    ,
@@ -68,12 +73,12 @@ const ControlsContainer = (props) => {
         repeat1Sec ,
         play1Sec   ,
         test       ,
-        stampText        ,
-        setStampText     ,
-        addStampListener ,
+        stampText           ,
+        setStampText        ,
+        createStampListener ,
     };
     
-    return <ControlsComponent containerProps={containerProps}/>
+    return <ControlsComponent containerProps={componentProps}/>
 
 }
 

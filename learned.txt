@@ -16,21 +16,81 @@
   local developmental enviroment, and the actual web address for deployment
   purposes.
 
+
+- Simplifying Redux action chain arguments:
+
+    For the Redux chain, there are 3 key points:
+      1. Event handlers (to listen on buttons)
+      2. Action creators
+      3. Reducer function itself (the switch case)
+
+    To keep things simple, it is best to describe action creators first, as they
+    serve as an interface you can refer to for guidance.
+
+    It is important that action creators expect an ARRAY OF VALUES, and CONVERT
+    these values into an ACTION OBJECTS.
+
+    (In some cases you could have just a single value, but it's best to still
+     put it in an array for consistency and predictability - so expect an array
+     with a single value.)
+
+    This will make code at the Event Handler level much simpler. All the handler
+    has to do, is to get the required values in the required order (as shown
+    clearly in the action object's parameters which we created previously), and
+    simply pass it on.
+
+    The action creator will deconstruct this array while giving the incoming
+    values the appropriate name. Then it will bundle these values into an
+    object, and using the object literal syntax, be much simpler to write out
+    by only having to put the values rather than the cumbersome 
+    {id: id, name: name,} methodology.
+
+
+- Container / Component terminology:
+    
+    Container is just the coded backend with state, methods and everything -
+    which it will pass to the Component that it Contains.
+    
+    Component is the actual JSX component that React is concerned with - with
+    buttons and handlers and all.
+
+    The Container is the one that spawns an instance of Component inside it,
+    passes it all the state / methods as props, and ultimately returns this
+    enhanced component.
+
+    The reason that the outer one is the coded 'Component' (backend) and the
+    inner one is the JSX heavy 'Container' (front end) is because the state
+    and methods are best passed as a prop object, which is done when spawning
+    another element.
+    
+    Hence, the code element (Container) spawns the presentational element 
+    (Component). And so, the actual App will link to Container, rather
+    than Component.
+
+    In short:
+
+      Container = JS code
+      Component = JSX component
+      Container spawns and holds Component
+      App links to Container
+
+
 - A nice directory structure is:
 
-    src/
-        App/
-        Components/
-            Component1/
-            Component2/
-            Component3/
-            Component2-Subcomponent1/
-        Pages/
-            Page1/
-            Page2/
-        Redux/
-        HelperFunctions/
-        index.js
+  src/
+      App/
+      Components/
+          Component1/
+          Component2/
+          Component3/Component3Container.js
+          Component3/Component3Component.js
+          Component2-Subcomponent1/
+      Pages/
+          Page1/
+          Page2/
+      Redux/
+      HelperFunctions/
+      index.js
 
   * It is better to have all the components and subcomponents at the same level
     of depth in terms of directories. This makes it easier to reuse components
@@ -43,3 +103,8 @@
     Remember, the "what's going on here" file will show the logical structure
     of components (or you can have it elsewhere too) to make it easier to
     understand the program immediately.
+
+    However, the Container (backend) / Component (presentational) architecture's
+    files relate to a single component, so they'll both be in the folder of
+    that single component itself. [Remember, Container spawns and holds
+    Component, to which it passes the state and methods as props.]

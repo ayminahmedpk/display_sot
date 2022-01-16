@@ -6,18 +6,17 @@ import {updatePlayerRef}          from '../../Redux/playerReducer' ;
 import {useDispatch}              from 'react-redux'               ;
 // Other
 import ReactPlayer                from 'react-player'              ;
-
 //Style
 import './YouTubeVideo.scss';
 
 
-
 const YouTubeVideo = (props) => {
 
-    const ourRef = useRef(null)
     const dispatch = useDispatch();
+    const ourRef = useRef(null)
+    
     useEffect(
-        () => { dispatch(updatePlayerRef(ourRef)); } ,
+        () => { dispatch(updatePlayerRef([ourRef])); } ,
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [ourRef]
     );
@@ -41,7 +40,6 @@ const YouTubeVideo = (props) => {
     );
 
 }
-
 
 
 export default YouTubeVideo;

@@ -1,17 +1,3 @@
-// Dependencies
-// React
-
-
-
-// Action creators
-export const updatePlayerRef = (ref) => {
-    return {
-        type    : 'UPDATE_PLAYER_REF' ,
-        payload : ref                 ,
-    }
-}
-
-
 // Initial state object
 export const initialState = {
     playerRef: null
@@ -33,6 +19,16 @@ export const playerReducer = (state = initialState, action) => {
 
     }
 }
+
+
+// Action creators
+export const updatePlayerRef = ([ref]) => ({
+    type    : 'UPDATE_PLAYER_REF' ,
+    payload : ref                 ,
+});
+
+
+
 
 
 /*

@@ -1,38 +1,3 @@
-// Dependencies
-// React
-
-
-
-// Action creators
-export const addStamp = ({stampTime, stampText}) => {
-    return {
-        type    : 'ADD_STAMP' ,
-        payload : {stampTime, stampText} ,
-    }
-}
-
-export const editStampTime = ({id, stampTime}) => {
-    return {
-        type    : 'EDIT_STAMP_TIME' ,
-        payload : {id, stampTime}   ,
-    }
-}
-
-export const editStampText = ({id, stampText}) => {
-    return {
-        type    : 'EDIT_STAMP_TEXT' ,
-        payload : {id, stampText} ,
-    }
-}
-
-export const deleteStamp = (id) => {
-    return {
-        type    : 'DELETE_STAMP' ,
-        payload : id             ,
-    }
-}
-
-
 // Initial state object
 export const initialState = {
     stampList     : [] ,
@@ -44,7 +9,7 @@ export const initialState = {
 export const stampReducer = (state = initialState, action) => {
     switch(action.type) {
         
-        case 'ADD_STAMP' : {
+        case 'CREATE_STAMP' : {
             const newStampList = JSON.parse(JSON.stringify(state.stampList));
             newStampList.push({
                 stampID : state.stampsCreated ,
@@ -54,33 +19,20 @@ export const stampReducer = (state = initialState, action) => {
                 stampList     : newStampList            ,
                 stampsCreated : state.stampsCreated + 1 ,
             }
-            break;
         }
 
-        case 'EDIT_STAMP_TIME' : {
+        case 'UPDATE_STAMP' : {
             const newStampList  = JSON.parse(JSON.stringify(state.stampList));
             const targetElement = newStampList.find(
                 element =>  (element.stampID == action.payload.id)
             );
-            targetElement.stampTime = action.payload.stampTime;
+            const targetValue = action.payload.name;
+            targetElement[targetValue] = action.payload.value;
+            
             return {
                 stampList     : newStampList        ,
                 stampsCreated : state.stampsCreated ,
             }
-            break;
-        }
-
-        case 'EDIT_STAMP_TEXT' : {
-            const newStampList  = JSON.parse(JSON.stringify(state.stampList));
-            const targetElement = newStampList.find(
-                element =>  (element.stampID == action.payload.id)
-            );
-            targetElement.stampText = action.payload.stampText;
-            return {
-                stampList     : newStampList        ,
-                stampsCreated : state.stampsCreated ,
-            }
-            break;
         }
 
         case 'DELETE_STAMP' : {
@@ -99,13 +51,18 @@ export const stampReducer = (state = initialState, action) => {
 }
 
 
-/*
+// Action object creators - return an object with a type and optional payload
+export const createStamp = ([stampTime, stampText]) => ({
+    type    : 'CREATE_STAMP'         ,
+    payload : {stampTime, stampText} ,
+});
 
-Clone the current state including the array of arrays,
-push the new value into the array with the additional id,
-increment the stampsCreated value
+export const updateStamp = ([id, name, value]) => ({
+    type    : 'UPDATE_STAMP'    ,
+    payload : {id, name, value} ,
+});
 
-State:
-[ [0, 2444, 'Something 1'], [1, 3555, 'Something 2']  ]
-
-*/
+export const deleteStamp = ([id]) => ({
+        type    : 'DELETE_STAMP' ,
+        payload : id             ,
+});

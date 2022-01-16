@@ -1,10 +1,19 @@
 
-* StampListContainer removal
 
-* StampListItem to be moved into separate folder?
 
-* Container / Component naming consistency (controls)
+-> Comment (failed to set OAuth functions in helpers - promises create issues
+   when passing awaited results as react components)
 
-* Edit stamp methods in Redux
+x Change domain name
 
-* OAuth
+x Confirmation of posted comment / link of it
+
+x StampListContainer removal
+
+x StampListItem to be moved into separate folder?
+
+x Container / Component naming consistency (controls)
+
+x All stamp methods in Redux (stampReducer)
+
+x OAuth
