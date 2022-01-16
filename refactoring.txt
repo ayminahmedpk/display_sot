@@ -1,10 +1,11 @@
 
 
 
--> Comment (failed to set OAuth functions in helpers - promises create issues
-   when passing awaited results as react components)
+x Change domain name
 
--> Change domain name
+-> Comment container component architecture
+
+x Comment OAuth helper
 
 x Confirmation of posted comment / link of it
 

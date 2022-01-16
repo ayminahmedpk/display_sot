@@ -7,7 +7,7 @@ import readAccessTokenFromStorage from '../../helperFunctions/readAccessTokenFro
         const endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
         var params = {
             client_id: '898576508322-96ntea1j9v37bnq24gg2e787cfs4to6i.apps.googleusercontent.com',
-            redirect_uri: 'http://localhost:3000',
+            redirect_uri: 'https://sot3.netlify.app',
             scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
             state: 'fetchAuthorizationToken',
             include_granted_scopes: 'true',

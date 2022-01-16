@@ -1,6 +1,6 @@
 {
   "name": "sot3",
-  "homepage": ".",
+  "homepage": "https://sot3.netlify.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
