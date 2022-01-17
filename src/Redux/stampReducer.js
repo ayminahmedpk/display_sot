@@ -63,6 +63,6 @@ export const updateStamp = ([id, name, value]) => ({
 });
 
 export const deleteStamp = ([id]) => ({
-        type    : 'DELETE_STAMP' ,
-        payload : id             ,
+    type    : 'DELETE_STAMP' ,
+    payload : id             ,
 });

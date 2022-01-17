@@ -1,56 +1,28 @@
-import {
-    React,
-    useState
-} from "react";
+import React from 'react';
 
-import { useSelector } from "react-redux";
+const CommentComponent = ({props}) => {
 
-import {
-    tryPostingComment ,
-    revokeAccess      ,
-} from "./CommentOAuthHelper";
-
-
-const Comment = () => {
-
-    const stampList = useSelector(state => state.stamps.stampList);
-
-    const [ comment       , setComment       ] = useState('') ;
-    const [ textboxStatus , setTextboxStatus ] = useState(0)  ;
-    const [ feedback      , setFeedback      ] = useState('') ;
-
-    const handleCommentChange = (event) => {
-        setComment(event.target.value)
-    }
-
-    const secondsToTimeString = (totalSeconds) => {
-        const seconds = totalSeconds % 60;
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const hours   = Math.floor(totalSeconds / 3600);
-        return (`${hours}:${minutes}:${seconds}`)
-    }
+    const {
+        comment             ,
+        result              ,
+        stampList           ,
+        textboxStatus       ,
+        generateComment     ,
+        hideTextbox         ,
+        handleCommentChange ,
+        postCommentHandler  ,
+        revokeYTOAuthToken  ,
+    } = props;
 
     const textbox = (
         <div>
             <textarea
-                type="textarea"
-                value={comment}
-                onChange={handleCommentChange}
+                type     = "textarea"
+                value    = {comment}
+                onChange = {handleCommentChange}
             />
         </div>
     )
-
-    const generateComment = () => {
-        let generatedComment = '';
-        stampList.forEach(stampItem => {
-            generatedComment += secondsToTimeString(stampItem.stampTime);
-            generatedComment += ` ${stampItem.stampText}\n`;
-        })
-        setTextboxStatus(1);
-        setComment(generatedComment);
-    }
-
-    // const comment = generateComment();
 
     const generateStampsButton = (
         <div>
@@ -62,7 +34,7 @@ const Comment = () => {
         <div>Add stamps to get started...</div>
     );
 
-    const hideTextbox = () => { setTextboxStatus(0); }
+    
     const hideTextboxButton = (
         <div>
             <button onClick={hideTextbox}>
@@ -71,12 +43,18 @@ const Comment = () => {
         </div>
     )
 
-    const postCommentHandler = async () => {
-        const result = await tryPostingComment(comment);
-        switch (result[0]) {
+    const postCommentButton = (
+        <button onClick={postCommentHandler}> Post Comment Directly </button>
+    )
 
-            case 'no token' :
-                setFeedback(
+    const revokeAccessButton = (
+        <button onClick={revokeYTOAuthToken}> Revoke Youtube Access </button>
+    )
+
+    const feedback = () => {
+        switch (result[0]) {
+            case 'no token found' :
+                return (
                     <div>
                         <p>
                             No access token found. Please allow access in the
@@ -84,21 +62,19 @@ const Comment = () => {
                         </p>
                     </div>
                 );
-            break;
-
             case 'success' :
-                setFeedback(
+                return (
                     <div>
                         <p>
                             Comment posted successfully.
+                        </p>
+                        <p>
                             Link : <a href={result[1]}>{result[1]}</a>
                         </p>
                     </div>
                 );
-            break;
-
             case 'error' :
-                setFeedback(
+                return (
                     <div>
                         <p>
                             Unable to post comment directly.
@@ -109,17 +85,10 @@ const Comment = () => {
                         </p>
                     </div>
                 );
-
+            default :
+                    return ''
         }
     }
-
-    const postCommentButton = (
-        <button onClick={postCommentHandler}> Post Comment Directly </button>
-    )
-
-    const revokeAccessButton = (
-        <button onClick={revokeAccess}> Revoke Youtube Access </button>
-    )
 
     return (
         <>
@@ -137,7 +106,7 @@ const Comment = () => {
                         {revokeAccessButton}
                     </div>
                     {hideTextboxButton}
-                    {feedback}
+                    {feedback()}
                 </> :
                 <></>
             )}
@@ -146,4 +115,4 @@ const Comment = () => {
 }
 
 
-export default Comment;
+export default CommentComponent;

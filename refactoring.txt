@@ -3,7 +3,9 @@
 
 x Change domain name
 
--> Comment container component architecture
+x Comment container component architecture
+
+x Turn CommmentOAuthHelper into multiple Custom Hooks
 
 x Comment OAuth helper
 

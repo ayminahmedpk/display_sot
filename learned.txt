@@ -1,5 +1,4 @@
 
-
 - It seems, when you use useSelector and seek for a particular value, the React
   Redux AI looks for the most reasonable match for that query. It's like a mini
   search function. So make sure your namings are clear and separate, or to use
@@ -75,6 +74,29 @@
       App links to Container
 
 
+- Custom hooks:
+    
+    Use whenever:
+      
+      * Your component seems to need something complicated that seems outside
+        its scope and requires a significant amount of code.
+      
+      * There is some code or behavior replicated by multiple components.
+
+    Note that the 'useHookName' syntax is used when naming hook files.
+    
+    Also note that you can't just have 'useHookName()' in the middle of your
+    component or a function. You need to declare the hook outside any function
+    in your component and then use it normally. Eg:
+
+      const hookName = useHookName;
+      ...
+      const result = hookName();
+
+    and so on.
+
+
+
 - A nice directory structure is:
 
   src/
@@ -89,6 +111,7 @@
           Page1/
           Page2/
       Redux/
+      CustomHooks/
       HelperFunctions/
       index.js
 

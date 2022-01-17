@@ -1,2 +1,11 @@
 "homepage": "https://ayminpk.github.io/sot3/build/",
-"homepage": "https://sot4.netlify.app/",
+"homepage": "https://sot3.netlify.app/",
+"homepage": ".",
+
+
+
+Changing between deployment and testing:
+
+1. package.json
+2. BrowserRouter for development, HashRouter for deployment
+3. OAuth redirect address in request
