@@ -32,11 +32,19 @@ const CommentContainer = () => {
     const handleCommentChange = (event) => { setComment(event.target.value) } ;
     const hideTextbox         = ()      => { setTextboxStatus(0);           } ;
 
+
+    const addZero = (time) => {
+        if (time < 10) {
+            return `0${time}`;
+        }
+        else return time;
+    }
+
     const secondsToTimeString = (totalSeconds) => {
         const seconds = totalSeconds % 60;
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const hours   = Math.floor(totalSeconds / 3600);
-        return (`${hours}:${minutes}:${seconds}`)
+        return (`${hours}:${addZero(minutes)}:${addZero(seconds)}`)
     };
 
     const generateComment = () => {
@@ -52,7 +60,9 @@ const CommentContainer = () => {
     const requestYTOAuthToken = () => {
         const endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
         var OAuthParams = {
-            client_id: '898576508322-96ntea1j9v37bnq24gg2e787cfs4to6i.apps.googleusercontent.com',
+            // client_id: '898576508322-96ntea1j9v37bnq24gg2e787cfs4to6i.apps.googleusercontent.com',
+            client_id: '344622845454-mqtdg969digrksk0htd52k7j8ofqb9iu.apps.googleusercontent.com',
+            // redirect_uri: 'http://localhost:3000',
             redirect_uri: 'https://sot3.netlify.app',
             scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
             state: 'fetchAuthorizationToken',

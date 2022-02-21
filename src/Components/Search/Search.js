@@ -22,7 +22,8 @@ const Search = () => {
     const retrieveSearchResults = async () => {
         const endpoint    = 'https://www.googleapis.com/youtube/v3/search';
         const queryParams = {
-            key         : 'AIzaSyANKVJ7LcR4YAZli4v2jYH9aghAAXk08ac',
+            // key         : 'AIzaSyANKVJ7LcR4YAZli4v2jYH9aghAAXk08ac',
+            key         : 'AIzaSyBXM9uyK2ATq5Jyjx99PvQSMnM7DF85wYE',
             q           : searchString, // Search Query, linked to state
             otherParams : {
                 part       : 'snippet',
